@@ -9,22 +9,28 @@ window.addEventListener("load", () => {
         el.classList.remove("highlighted");
     };
 
-    const style = document.createElement("style");
-    document.head.append(style);
-    const { sheet } = style;
-    if (!sheet) return debug("stylesheet not connected");
+    const appendStyles = () => {
+        const style = document.createElement("style");
+        document.head.append(style);
+        const { sheet } = style;
+        if (!sheet) return debug("stylesheet not connected");
 
-    sheet.insertRule(`
-        .question .postcell,
-        .answer .answercell,
-        .question .postcell img,
-        .answer .answercell img {
-            transition: background-color 1s ease-out;
-        }`);
+        const rules: string[] = [
+            `.question .postcell,
+             .answer .answercell,
+             .question .postcell img,
+             .answer .answercell img {
+                transition: background-color 1s ease-out;
+            `,
+            `.highlighted {
+                background-color: var(--black-050);
+            }`
+        ];
 
-    sheet.insertRule(`.highlighted {
-            background-color: hsl(11, 100%, 96%);
-        }`);
+        rules.forEach((rule) => sheet.insertRule(rule));
+    };
+
+    appendStyles();
 
     const pmenus = document.querySelectorAll<HTMLElement>(".js-post-menu .d-flex");
     pmenus.forEach((pmenu) => {

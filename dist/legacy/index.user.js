@@ -28,7 +28,7 @@
 // @run-at          document-start
 // @source          git+https://github.com/userscripters/post-box-highlighter.git
 // @supportURL      https://github.com/userscripters/post-box-highlighter/issues
-// @version         0.1.0
+// @version         0.2.0
 // ==/UserScript==
 
 "use strict";
@@ -95,13 +95,19 @@ window.addEventListener("load", function () {
             }
         });
     }); };
-    var style = document.createElement("style");
-    document.head.append(style);
-    var sheet = style.sheet;
-    if (!sheet)
-        return debug("stylesheet not connected");
-    sheet.insertRule("\n        .question .postcell,\n        .answer .answercell,\n        .question .postcell img,\n        .answer .answercell img {\n            transition: background-color 1s ease-out;\n        }");
-    sheet.insertRule(".highlighted {\n            background-color: hsl(11, 100%, 96%);\n        }");
+    var appendStyles = function () {
+        var style = document.createElement("style");
+        document.head.append(style);
+        var sheet = style.sheet;
+        if (!sheet)
+            return debug("stylesheet not connected");
+        var rules = [
+            ".question .postcell,\n             .answer .answercell,\n             .question .postcell img,\n             .answer .answercell img {\n                transition: background-color 1s ease-out;\n            ",
+            ".highlighted {\n                background-color: var(--black-050);\n            }"
+        ];
+        rules.forEach(function (rule) { return sheet.insertRule(rule); });
+    };
+    appendStyles();
     var pmenus = document.querySelectorAll(".js-post-menu .d-flex");
     pmenus.forEach(function (pmenu) {
         var dataset = pmenu.dataset;
