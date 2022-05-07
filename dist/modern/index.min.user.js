@@ -31,7 +31,7 @@
 // @version         0.1.0
 // ==/UserScript==
 
-"use strict";((e,l)=>{const o=e=>console.debug("[post-box-highlighter] "+e),i=async e=>{var t;e.classList.add("highlighted"),t=1.5,await new Promise(e=>setTimeout(e,1e3*t)),e.classList.remove("highlighted")};e.addEventListener("load",()=>{var e=l.createElement("style");l.head.append(e);const t=e["sheet"];if(!t)return o("stylesheet not connected");t.insertRule(`
+"use strict";window.addEventListener("load",()=>{const o=e=>console.debug("[post-box-highlighter] "+e),l=async e=>{var t;e.classList.add("highlighted"),t=1.5,await new Promise(e=>setTimeout(e,1e3*t)),e.classList.remove("highlighted")};var e=document.createElement("style");document.head.append(e);const t=e["sheet"];if(!t)return o("stylesheet not connected");t.insertRule(`
         .question .postcell,
         .answer .answercell,
         .question .postcell img,
@@ -39,4 +39,4 @@
             transition: background-color 1s ease-out;
         }`),t.insertRule(`.highlighted {
             background-color: hsl(11, 100%, 96%);
-        }`);const s=l.querySelectorAll(".js-post-menu .d-flex");s.forEach(e=>{const t=l.createElement("div"),n=(t.classList.add("flex--item"),l.createElement("button"));n.type="button",n.classList.add("s-btn","s-btn__link"),n.title="Highlight the post background",n.textContent="Highlight",n.addEventListener("click",()=>{const e=n.closest(".answercell, .postcell");if(!e)return o("post box missing");var t=e.querySelectorAll("img");i(e);for(const s of t)i(s)}),t.append(n),e.append(t)})})})(window,document);
+        }`);const s=document.querySelectorAll(".js-post-menu .d-flex");s.forEach(e=>{var t=e["dataset"];if(!t.highlightSet){const s=document.createElement("div"),n=(s.classList.add("flex--item"),document.createElement("button"));n.type="button",n.classList.add("s-btn","s-btn__link"),n.title="Highlight the post background",n.textContent="Highlight",n.addEventListener("click",()=>{const e=n.closest(".answercell, .postcell");if(!e)return o("post box missing");var t=e.querySelectorAll("img");l(e);for(const s of t)l(s)}),s.append(n),e.append(s),Object.assign(t,{highlightSet:!0})}})});

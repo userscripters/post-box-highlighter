@@ -79,7 +79,7 @@ var __values = (this && this.__values) || function(o) {
     };
     throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
 };
-(function (w, d) {
+window.addEventListener("load", function () {
     var delay = function (sec) { return new Promise(function (r) { return setTimeout(r, sec * 1e3); }); };
     var debug = function (msg) { return console.debug("[post-box-highlighter] ".concat(msg)); };
     var highlight = function (el) { return __awaiter(void 0, void 0, void 0, function () {
@@ -95,46 +95,49 @@ var __values = (this && this.__values) || function(o) {
             }
         });
     }); };
-    w.addEventListener("load", function () {
-        var style = d.createElement("style");
-        d.head.append(style);
-        var sheet = style.sheet;
-        if (!sheet)
-            return debug("stylesheet not connected");
-        sheet.insertRule("\n        .question .postcell,\n        .answer .answercell,\n        .question .postcell img,\n        .answer .answercell img {\n            transition: background-color 1s ease-out;\n        }");
-        sheet.insertRule(".highlighted {\n            background-color: hsl(11, 100%, 96%);\n        }");
-        var pmenus = d.querySelectorAll(".js-post-menu .d-flex");
-        pmenus.forEach(function (pmenu) {
-            var control = d.createElement("div");
-            control.classList.add("flex--item");
-            var btn = d.createElement("button");
-            btn.type = "button";
-            btn.classList.add("s-btn", "s-btn__link");
-            btn.title = "Highlight the post background";
-            btn.textContent = "Highlight";
-            btn.addEventListener("click", function () {
-                var e_1, _a;
-                var pwrap = btn.closest(".answercell, .postcell");
-                if (!pwrap)
-                    return debug("post box missing");
-                var images = pwrap.querySelectorAll("img");
-                highlight(pwrap);
+    var style = document.createElement("style");
+    document.head.append(style);
+    var sheet = style.sheet;
+    if (!sheet)
+        return debug("stylesheet not connected");
+    sheet.insertRule("\n        .question .postcell,\n        .answer .answercell,\n        .question .postcell img,\n        .answer .answercell img {\n            transition: background-color 1s ease-out;\n        }");
+    sheet.insertRule(".highlighted {\n            background-color: hsl(11, 100%, 96%);\n        }");
+    var pmenus = document.querySelectorAll(".js-post-menu .d-flex");
+    pmenus.forEach(function (pmenu) {
+        var dataset = pmenu.dataset;
+        if (dataset.highlightSet) {
+            return;
+        }
+        var control = document.createElement("div");
+        control.classList.add("flex--item");
+        var btn = document.createElement("button");
+        btn.type = "button";
+        btn.classList.add("s-btn", "s-btn__link");
+        btn.title = "Highlight the post background";
+        btn.textContent = "Highlight";
+        btn.addEventListener("click", function () {
+            var e_1, _a;
+            var pwrap = btn.closest(".answercell, .postcell");
+            if (!pwrap)
+                return debug("post box missing");
+            var images = pwrap.querySelectorAll("img");
+            highlight(pwrap);
+            try {
+                for (var images_1 = __values(images), images_1_1 = images_1.next(); !images_1_1.done; images_1_1 = images_1.next()) {
+                    var image = images_1_1.value;
+                    highlight(image);
+                }
+            }
+            catch (e_1_1) { e_1 = { error: e_1_1 }; }
+            finally {
                 try {
-                    for (var images_1 = __values(images), images_1_1 = images_1.next(); !images_1_1.done; images_1_1 = images_1.next()) {
-                        var image = images_1_1.value;
-                        highlight(image);
-                    }
+                    if (images_1_1 && !images_1_1.done && (_a = images_1.return)) _a.call(images_1);
                 }
-                catch (e_1_1) { e_1 = { error: e_1_1 }; }
-                finally {
-                    try {
-                        if (images_1_1 && !images_1_1.done && (_a = images_1.return)) _a.call(images_1);
-                    }
-                    finally { if (e_1) throw e_1.error; }
-                }
-            });
-            control.append(btn);
-            pmenu.append(control);
+                finally { if (e_1) throw e_1.error; }
+            }
         });
+        control.append(btn);
+        pmenu.append(control);
+        Object.assign(dataset, { highlightSet: true });
     });
-})(window, document);
+});

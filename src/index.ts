@@ -1,4 +1,4 @@
-((w, d) => {
+window.addEventListener("load", () => {
     const delay = (sec: number) => new Promise((r) => setTimeout(r, sec * 1e3));
 
     const debug = (msg: string) => console.debug(`[post-box-highlighter] ${msg}`);
@@ -9,13 +9,12 @@
         el.classList.remove("highlighted");
     };
 
-    w.addEventListener("load", () => {
-        const style = d.createElement("style");
-        d.head.append(style);
-        const { sheet } = style;
-        if (!sheet) return debug("stylesheet not connected");
+    const style = document.createElement("style");
+    document.head.append(style);
+    const { sheet } = style;
+    if (!sheet) return debug("stylesheet not connected");
 
-        sheet.insertRule(`
+    sheet.insertRule(`
         .question .postcell,
         .answer .answercell,
         .question .postcell img,
@@ -23,33 +22,40 @@
             transition: background-color 1s ease-out;
         }`);
 
-        sheet.insertRule(`.highlighted {
+    sheet.insertRule(`.highlighted {
             background-color: hsl(11, 100%, 96%);
         }`);
 
-        const pmenus = d.querySelectorAll(".js-post-menu .d-flex");
-        pmenus.forEach((pmenu) => {
-            const control = d.createElement("div");
-            control.classList.add("flex--item");
+    const pmenus = document.querySelectorAll<HTMLElement>(".js-post-menu .d-flex");
+    pmenus.forEach((pmenu) => {
+        const { dataset } = pmenu;
 
-            const btn = d.createElement("button");
-            btn.type = "button";
-            btn.classList.add("s-btn", "s-btn__link");
-            btn.title = "Highlight the post background";
-            btn.textContent = "Highlight";
+        if (dataset.highlightSet) {
+            return;
+        }
 
-            btn.addEventListener("click", () => {
-                const pwrap = btn.closest(".answercell, .postcell");
-                if (!pwrap) return debug("post box missing");
+        const control = document.createElement("div");
+        control.classList.add("flex--item");
 
-                const images = pwrap.querySelectorAll("img");
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.classList.add("s-btn", "s-btn__link");
+        btn.title = "Highlight the post background";
+        btn.textContent = "Highlight";
 
-                highlight(pwrap);
-                for (const image of images) highlight(image);
-            });
+        btn.addEventListener("click", () => {
+            const pwrap = btn.closest(".answercell, .postcell");
+            if (!pwrap) return debug("post box missing");
 
-            control.append(btn);
-            pmenu.append(control);
+            const images = pwrap.querySelectorAll("img");
+
+            highlight(pwrap);
+            for (const image of images) highlight(image);
         });
+
+        control.append(btn);
+        pmenu.append(control);
+
+        Object.assign(dataset, { highlightSet: true });
     });
-})(window, document);
+});
