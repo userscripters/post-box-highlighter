@@ -4,7 +4,7 @@ script posts
 
 
 <!-- thumbnail:  -->
-<!-- version: 0.2.0 -->
+<!-- version: 0.3.0 -->
 <!-- tag: script -->
 <!-- excerpt: Post Box Highlighter is a simple userscript for temporarily highlighting question or answer boxes. -->
 
@@ -23,7 +23,7 @@ The script is licensed under the [GPL-3.0-or-later](https://spdx.org/licenses/GP
 
 ### Download
 
-Latest version: 0.2.0
+Latest version: 0.3.0
 
 [Install](https://github.com/userscripters/post-box-highlighter/raw/master/dist/modern/index.user.js) | [Minified](https://github.com/userscripters/post-box-highlighter/raw/master/dist/modern/index.min.user.js)
 
@@ -39,7 +39,7 @@ Version number means "last tested on":
 
 | Version    | Description |
 | ---------- | ----------- |
-| 0.2.0 |             |
+| 0.3.0 |             |
 
 ## Contact
 

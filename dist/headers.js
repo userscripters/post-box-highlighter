@@ -28,5 +28,5 @@
 // @run-at          document-start
 // @source          git+https://github.com/userscripters/post-box-highlighter.git
 // @supportURL      https://github.com/userscripters/post-box-highlighter/issues
-// @version         0.2.0
+// @version         0.3.0
 // ==/UserScript==
