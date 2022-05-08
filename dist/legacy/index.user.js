@@ -102,7 +102,7 @@ window.addEventListener("load", function () {
         if (!sheet)
             return debug("stylesheet not connected");
         var rules = [
-            ".question .postcell,\n             .answer .answercell,\n             .question .postcell img,\n             .answer .answercell img {\n                transition: background-color 1s ease-out;\n            ",
+            ".question .postcell,\n             .question .votecell,\n             .answer .answercell,\n             .answer .votecell,\n             .question .postcell img,\n             .answer .answercell img {\n                transition: background-color 1s ease-out;\n            ",
             ".highlighted {\n                background-color: var(--black-050);\n            }"
         ];
         rules.forEach(function (rule) { return sheet.insertRule(rule); });
@@ -126,6 +126,10 @@ window.addEventListener("load", function () {
             var pwrap = btn.closest(".answercell, .postcell");
             if (!pwrap)
                 return debug("post box missing");
+            var vwrap = pwrap.previousElementSibling;
+            if (vwrap && vwrap.classList.contains("votecell")) {
+                highlight(vwrap);
+            }
             var images = pwrap.querySelectorAll("img");
             highlight(pwrap);
             try {

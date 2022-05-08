@@ -17,7 +17,9 @@ window.addEventListener("load", () => {
 
         const rules: string[] = [
             `.question .postcell,
+             .question .votecell,
              .answer .answercell,
+             .answer .votecell,
              .question .postcell img,
              .answer .answercell img {
                 transition: background-color 1s ease-out;
@@ -52,6 +54,11 @@ window.addEventListener("load", () => {
         btn.addEventListener("click", () => {
             const pwrap = btn.closest(".answercell, .postcell");
             if (!pwrap) return debug("post box missing");
+
+            const vwrap = pwrap.previousElementSibling;
+            if (vwrap && vwrap.classList.contains("votecell")) {
+                highlight(vwrap);
+            }
 
             const images = pwrap.querySelectorAll("img");
 
