@@ -43,7 +43,7 @@ Version number means "last tested on":
 
 ## Contact
 
-Author: Oleg Valter
+Author: [Oleg Valter](https://stackoverflow.com/users/11407695)
 Organization: [UserScripters](https://github.com/userscripters)
 
 Please, submit bug reports [on the source repository](https://github.com/userscripters/post-box-highlighter/issues)
