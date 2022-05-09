@@ -1,7 +1,7 @@
 
 # About
 
-| Author       | Oleg Valter<br>[oleg.a.valter@gmail.com](mailto:oleg.a.valter@gmail.com) |
+| Author       | Oleg Valter<br>[oleg.a.valter@gmail.com](mailto:oleg.a.valter@gmail.com)<br>[https://stackoverflow.com/users/11407695](https://stackoverflow.com/users/11407695) |
 | :----------- | :----------------------- |
 | Name | @userscripters/post-box-highlighter |
 | Description | Highlight a post box background |

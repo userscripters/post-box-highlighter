@@ -1,5 +1,5 @@
 // ==UserScript==
-// @author          Oleg Valter <oleg.a.valter@gmail.com>
+// @author          Oleg Valter <oleg.a.valter@gmail.com> (https://stackoverflow.com/users/11407695)
 // @description     Highlight a post box background
 // @grant           none
 // @homepage        https://github.com/userscripters/post-box-highlighter#readme
